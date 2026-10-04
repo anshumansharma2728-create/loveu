@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday ❤️</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    }
+
+    /* HEART INTRO */
+    .heart-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffe0e6;
+      animation: hideHeart 1s forwards;
+      animation-delay: 4s;
+    }
+
+    .heart {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      background: #ff1744;
+      transform: rotate(-45deg);
+      animation: beat 1s infinite;
+      box-shadow: 0 0 40px #ff1744;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: #ff1744;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -50px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: 50px;
+    }
+
+    @keyframes beat {
+      0%, 100% {
+        transform: rotate(-45deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(-45deg) scale(1.2);
+      }
+    }
+
+    @keyframes hideHeart {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* BIRTHDAY */
+    .birthday {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      opacity: 0;
+      animation: showBirthday 1.5s ease forwards;
+      animation-delay: 4.3s;
+    }
+
+    .birthday h1 {
+      color: white;
+      font-size: clamp(45px, 10vw, 100px);
+
+      text-shadow:
+        0 0 10px #ff1744,
+        0 0 20px #ff1744,
+        0 0 40px #ff1744;
+
+      animation: pop 1s ease;
+    }
+
+    .birthday p {
+      margin-top: 20px;
+      color: white;
+      font-size: clamp(18px, 4vw, 32px);
+    }
+
+    @keyframes showBirthday {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(0);
+      }
+
+      80% {
+        transform: scale(1.15);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* BALLOONS */
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 70px;
+      height: 85px;
+      border-radius: 50%;
+      animation: fly 8s linear infinite;
+    }
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 100px;
+      background: #555;
+      left: 50%;
+      top: 80px;
+    }
+
+    .balloon1 {
+      left: 10%;
+      background: #ff4081;
+    }
+
+    .balloon2 {
+      left: 30%;
+      background: #7c4dff;
+      animation-delay: 2s;
+    }
+
+    .balloon3 {
+      left: 70%;
+      background: #00bcd4;
+      animation-delay: 1s;
+    }
+
+    .balloon4 {
+      left: 85%;
+      background: #ffeb3b;
+      animation-delay: 3s;
+    }
+
+    @keyframes fly {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-120vh);
+      }
+    }
+
+    /* CONFETTI */
+    .confetti {
+      position: absolute;
+      top: -20px;
+      width: 10px;
+      height: 20px;
+      animation: fall 4s linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEART INTRO -->
+  <div class="heart-screen">
+    <div class="heart"></div>
+  </div>
+
+
+  <!-- BIRTHDAY SCREEN -->
+  <div class="birthday">
+
+    <div class="balloon balloon1"></div>
+    <div class="balloon balloon2"></div>
+    <div class="balloon balloon3"></div>
+    <div class="balloon balloon4"></div>
+
+    <h1>🎉 Happy Birthday! 🎂</h1>
+
+    <p>Wishing you lots of happiness, love & smiles ❤️</p>
+
+  </div>
+
+
+  <script>
+    // Confetti colors
+    const colors = [
+      "#ff1744",
+      "#ffeb3b",
+      "#00e5ff",
+      "#7c4dff",
+      "#69f0ae",
+      "#ff4081"
+    ];
+
+    // Create confetti
+    for (let i = 0; i < 80; i++) {
+
+      const confetti = document.createElement("div");
+
+      confetti.className = "confetti";
+
+      confetti.style.left =
+        Math.random() * 100 + "vw";
+
+      confetti.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+      confetti.style.animationDelay =
+        Math.random() * 5 + "s";
+
+      confetti.style.animationDuration =
+        3 + Math.random() * 4 + "s";
+
+      confetti.style.transform =
+        `rotate(${Math.random() * 360}deg)`;
+
+      document.body.appendChild(confetti);
+    }
+  </script>
+
+</body>
+</html>
